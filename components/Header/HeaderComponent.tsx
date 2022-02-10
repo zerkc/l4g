@@ -7,7 +7,14 @@ function generateMenu(items: any, isSubmenu: boolean, parent:number = 0){
             return (<li key={e.text}>
                 <Link href={e.href}>
                     <a className={`${styles.item} ${e.children && styles.hasSubmenu}`}>
-                        <span>{e.text}</span> {e.children && (parent == 0 ? '▼' : '►')}
+                        <span>
+                            <span>{e.text}</span> 
+                            <span onClick={evt=>{
+                                evt.preventDefault();
+                                evt.stopPropagation();
+                                return false;
+                            }} className={styles.arrow}>{e.children && (parent == 0 ? '▼' : '►')}</span>
+                        </span>
                         {e.children && generateMenu(e.children, true, parent + 1)}
                     </a>
                 </Link>
@@ -43,7 +50,7 @@ export default function HeaderComponent(props:any){
         {
             href:"/e-sports",
             text:"e-Sports",
-            children:[
+            /* children:[
                 {
                     href:"/valorant",
                     text:"Valorant"
@@ -68,7 +75,7 @@ export default function HeaderComponent(props:any){
                     href:"/clashroyale",
                     text:"Clash Royale"
                 },
-            ]
+            ] */
         },
         {
             href:"/games",
@@ -77,7 +84,7 @@ export default function HeaderComponent(props:any){
                 {
                     href:"/nuestros_servidores",
                     text:"Nuestros Servidores",
-                    children:[
+                    /* children:[
                         {
                             href:"/lineageii",
                             text:"Lineage II"
@@ -90,12 +97,12 @@ export default function HeaderComponent(props:any){
                             href:"/mu",
                             text:"Mu Online"
                         },
-                    ]
+                    ] */
                 },
                 {
                     href:"/que_jugamos",
                     text:"¿Que andamos jugando?",
-                    children:[
+                    /* children:[
                         {
                             href:"/teamfight_tactics",
                             text:"TeamFight Tactics"
@@ -108,7 +115,7 @@ export default function HeaderComponent(props:any){
                             href:"/Dota2",
                             text:"DotA2"
                         },
-                    ]
+                    ] */
                 },
             ]
         },

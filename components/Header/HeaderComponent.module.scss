@@ -17,6 +17,7 @@
     }
     .menu{
         font-size: 1.2rem;
+        z-index: 1;
         .item{
             display: block;
             padding: 10px 20px;
@@ -49,6 +50,37 @@
                 > .submenu{
                     display: block;
                 }
+            }
+        }
+    }
+}
+
+@media (max-width: 1900px) {
+    nav {
+        & > .menu{
+            position: absolute;
+            flex-direction: column;
+            background-color: var(--bg-color);
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            .item{
+                flex-direction: column;
+                width: 100%;
+            }
+            .arrow{
+                display: inline-block;
+                width: 30px;
+                text-align: right;
+            }
+            .arrow:active + .submenu{
+                display: block;
+            }
+            .submenu{
+                width: 100%;
+                max-width: initial !important;
+                position: relative !important;
             }
         }
     }

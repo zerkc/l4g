@@ -1,0 +1,52 @@
+.title{
+    display: inline-block;
+    transform: translateX(-100%);
+    animation-name: enterRight;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+}
+.Section{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
+    gap: 100px;
+    img{
+        opacity: 0;
+        max-width: 100%;
+        animation-name: enter;
+        animation-duration: 1.5s;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+        @for $i from 0 to 10{
+            &:nth-child(#{$i + 1}){
+                animation-delay: #{200ms * $i};
+            }
+        }
+    }
+}
+@keyframes enterRight {
+    0% {
+        transform: translateX(-100%);
+    }
+    40%{
+        transform: translateX(30%);
+    }
+    60%{
+        transform: translateX(-20%);
+    }
+    80%{
+        transform: translateX(10%);
+    }
+    100%{
+        transform: translateX(0%);
+    }
+}
+@keyframes enter{
+    0%{
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}

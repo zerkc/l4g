@@ -8,6 +8,9 @@
             max-width: 27%;
         }
     }
+    .logoMobile{
+        display: none;
+    }
     .separator{
         flex: 1 1 1px;
         min-width: 0px;
@@ -72,6 +75,7 @@
             position:absolute;
             left: 10px;
             z-index: 2;
+            display: block;
         }
         .mobileMenu{
             display: block;

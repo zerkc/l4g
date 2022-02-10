@@ -6,7 +6,7 @@ import styles from '../styles/e-sports.module.scss'
 const nfts: NextPage = ({games}: any) => {
   return (
     <BodyComponent>
-      <h1 className={styles.title}>NFT's</h1>
+      <h1 className={styles.title}>NFT&apos;s</h1>
       <section className={styles.Section}>
         {games.map((e:any)=>{
           return <img key={e.src} src={e.src} />

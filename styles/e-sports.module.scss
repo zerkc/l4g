@@ -8,6 +8,9 @@
 .Section{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
+    @media (max-width: 500px) {
+        grid-template-columns: 1fr
+    }
     gap: 100px;
     img{
         opacity: 0;
@@ -18,7 +21,7 @@
         animation-fill-mode: forwards;
         @for $i from 0 to 10{
             &:nth-child(#{$i + 1}){
-                animation-delay: #{200ms * $i};
+                animation-delay: #{300ms * $i};
             }
         }
     }

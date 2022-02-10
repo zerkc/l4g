@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import styles from './HeaderComponent.module.scss';
 
 function generateMenu(items: any, isSubmenu: boolean, parent:number = 0){
@@ -12,7 +13,11 @@ function generateMenu(items: any, isSubmenu: boolean, parent:number = 0){
                             <span onClick={evt=>{
                                 evt.preventDefault();
                                 evt.stopPropagation();
-                                return false;
+                                (document.querySelectorAll("."+styles.active) || []).forEach(e=>{
+                                    e.classList.toggle(styles.active)
+                                })
+                                evt.currentTarget?.parentElement?.classList?.toggle?.(styles.active);
+                                /* return false; */
                             }} className={styles.arrow}>{e.children && (parent == 0 ? '▼' : '►')}</span>
                         </span>
                         {e.children && generateMenu(e.children, true, parent + 1)}
@@ -26,7 +31,7 @@ function generateMenu(items: any, isSubmenu: boolean, parent:number = 0){
 export default function HeaderComponent(props:any){
     let MenuItems = [
         {
-            href:"/",
+            href:"#",
             text:"Comunidad",
             children:[
                 {
@@ -78,7 +83,7 @@ export default function HeaderComponent(props:any){
             ] */
         },
         {
-            href:"/games",
+            href:"#",
             text:"Juegos",
             children:[
                 {
@@ -122,7 +127,7 @@ export default function HeaderComponent(props:any){
         {
             href:"/nfts",
             text:"NFT's",
-            children:[
+            /* children:[
                 {
                     href:"/thetan_arena",
                     text:"Thetan Arena"
@@ -135,13 +140,41 @@ export default function HeaderComponent(props:any){
                     href:"/axie_infinity",
                     text:"Axie Infinity"
                 },
-            ]
+            ] */
         },
     ]
+    const [menuActive, setMenuActive] = useState(false);
+    useEffect(()=>{
+        function closeMenu(evt:any){
+            let target = evt.target;
+            while(target){
+                if(target.classList.contains(styles.header)){
+                    return;
+                }else{
+                    target = target.parentElement;
+                }
+            }
+            setMenuActive(false);
+        }
+        window.addEventListener('click',closeMenu);
+        return ()=>{
+            window.removeEventListener('click',closeMenu);
+        }
+    },[menuActive])
     return (<header className={styles.header}>
         <img src='/images/logo.png' />
+        <img className={styles.logoMobile} src='/images/logo.png' />
         <div className={styles.separator}></div>
-        <nav>
+        <div onClick={()=>{
+            setMenuActive(!menuActive);
+        }} className={styles.mobileMenu}>
+            <div className={`${styles.lineContainer}`}>
+                <div className={`${styles.line} ${menuActive && styles.lineActive}`}></div>
+                <div className={`${styles.line} ${menuActive && styles.lineActive}`}></div>
+                <div className={`${styles.line} ${menuActive && styles.lineActive}`}></div>
+            </div>
+        </div>
+        <nav className={`${menuActive && styles.menuActive}`}>
             {generateMenu(MenuItems, false)}
             {/* <ul className={styles.menu}>
                 <li className={`${styles.hasSubmenu} ${styles.item}`}>Comunidad

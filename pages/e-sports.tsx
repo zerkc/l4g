@@ -9,7 +9,7 @@ const esports: NextPage = ({games}: any) => {
       <h1 className={styles.title}>Nuestros Juegos</h1>
       <section className={styles.Section}>
         {games.map((e:any)=>{
-          return <img src={e.src} />
+          return <img key={e.src} src={e.src} />
         })}
         <img />        
       </section>
